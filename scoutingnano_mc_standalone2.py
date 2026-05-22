@@ -31,6 +31,7 @@ process.source = cms.Source("PoolSource",
     #fileNames = cms.untracked.vstring('file:0034afa6-0d8d-4409-8154-afda2a1d7d4b.root'),
     #fileNames = cms.untracked.vstring('root://eos.cms.rcac.purdue.edu//store/mc/RunIII2024Summer24MiniAODv6/TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/MINIAODSIM/150X_mcRun3_2024_realistic_v2-v3/2810005/b9aaedef-5544-445d-8445-0dd6740ff646.root'),
     fileNames = cms.untracked.vstring('root://cmsxrootd.fnal.gov//store/mc/RunIII2024Summer24MiniAODv6/TTto4Q_TuneCP5_13p6TeV_powheg-pythia8/MINIAODSIM/150X_mcRun3_2024_realistic_v2-v2/110000/00cbbb1e-7f25-47d0-9d35-13eb12e55cb6.root'),
+    #eventsToProcess = cms.untracked.VEventRange("1:607677:447857216"),
     secondaryFileNames = cms.untracked.vstring()
 )
 
