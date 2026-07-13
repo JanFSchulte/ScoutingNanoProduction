@@ -6,7 +6,7 @@ Installation recipe:
 cmsrel CMSSW_16_1_0_pre4
 cd CMSSW_16_1_0_pre4/src
 cmsenv
-git cms-checkout-topic JanFSchulte:derivedScouting -u 
+git cms-checkout-topic JanFSchulte:scoutingForVVV -u 
 scram b -j 8
 
 git clone https://github.com/JanFSchulte/ScoutingNanoProduction.git
