@@ -39,6 +39,7 @@ mc_samples = {
         'WminusH-WtoLNu-Hto2Wto4Q': '/WminusH-WtoLNu-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
         'WminusH-WtoLNu-Hto2WtoLNu2Q': '/WminusH-WtoLNu-Hto2WtoLNu2Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
         'WplusH-Wto2Q-Hto2WtoLNu2Q': '/WplusH-Wto2Q-Hto2WtoLNu2Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WplusH-Wto2Q-Hto2Wto2L2Nu': '/WplusH_Wto2Q_Hto2Wto2L2Nu_M-125_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
         'WplusH-WtoLNu-Hto2Wto2L2Nu': '/WplusH-WtoLNu-Hto2Wto2L2Nu_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
         'WplusH-WtoLNu-Hto2Wto4Q': '/WplusH-WtoLNu-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
         'WplusH-WtoLNu-Hto2WtoLNu2Q': '/WplusH-WtoLNu-Hto2WtoLNu2Q_M-125_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
@@ -132,6 +133,7 @@ mc_samples = {
 parser = argparse.ArgumentParser(description='Submit or resubmit ScoutingNano CRAB tasks')
 parser.add_argument('-s', '--submit',   action='store_true', help='Submit new CRAB tasks')
 parser.add_argument('-r', '--resubmit', action='store_true', help='Resubmit failed jobs in existing CRAB projects')
+parser.add_argument('--report',        action='store_true', help='Report number of events processed (before event filters) for existing MC CRAB tasks')
 parser.add_argument('--mc',            action='store_true', help='Run over MC samples instead of data')
 args = parser.parse_args()
 
@@ -209,11 +211,11 @@ def chunks(lst, n):
         yield lst[i:i + n]
 
 
-if not args.mc:
+if not args.mc and not args.resubmit and not args.report:
     with open(LUMI_JSON) as f:
         lumi_json = json.load(f)
 
-if not args.resubmit:
+if not args.resubmit and not args.report:
   samples = mc_samples if args.mc else data_samples
   mode_label = 'MC' if args.mc else 'Data'
 
@@ -277,5 +279,24 @@ if args.resubmit:
             crabCommand('resubmit', dir=d, siteblacklist='T2_BR_UERJ,T2_US_Florida,T2_US_Wisconsin,T2_US_Caltech,T2_US_Nebraska')
         except:
             print ("failed to resubmit, most likely there are no failed jobs")
+
+if args.report:
+    print('\nReporting events processed (before event filters) for MC CRAB tasks:')
+    total_events = 0
+    for sample in mc_samples:
+        task_name = f'scoutingNanoUParT_{sample}'
+        d = os.path.join('crab_projects', f'crab_{task_name}')
+        if not os.path.isdir(d):
+            print(f'  [{sample}] No CRAB project directory found ({d}), skipping.')
+            continue
+        try:
+            res = crabCommand('report', dir=d)
+            n = res.get('numEventsRead', 'n/a')
+            print(f'  [{sample}] Events read (pre-filter): {n}')
+            if isinstance(n, str) and n.isdigit():
+                total_events += int(n)
+        except Exception as e:
+            print(f'  [{sample}] Failed to get report: {e}')
+    print(f'\nTotal events read across all MC tasks: {total_events}')
 
 print('\nDone :)')
