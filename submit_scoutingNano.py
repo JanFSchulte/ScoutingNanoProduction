@@ -8,7 +8,7 @@ from CRABAPI.RawCommand import crabCommand
 
 MAX_FILES_PER_TASK = 9000
 CACHE_DIR = 'filelist_cache'
-LUMI_JSON = '2024.json'
+LUMI_JSON = 'Cert_Collisions2025_391658_398903_Golden.json'
 
 data_samples = {
     #'2024B': '/ScoutingPFRun3/Run2024B-v1/HLTSCOUT',
@@ -18,40 +18,64 @@ data_samples = {
     #'2024F': '/ScoutingPFRun3/Run2024F-v1/HLTSCOUT',
     #'2024G': '/ScoutingPFRun3/Run2024G-v1/HLTSCOUT',
     #'2024H': '/ScoutingPFRun3/Run2024H-v1/HLTSCOUT',
-    '2024I': '/ScoutingPFRun3/Run2024I-v1/HLTSCOUT',
+    #'2024I': '/ScoutingPFRun3/Run2024I-v1/HLTSCOUT',
+    '2025B': '/ScoutingPFRun3/Run2025B-v1/HLTSCOUT',
+    #'2025C': '/ScoutingPFRun3/Run2025C-v1/HLTSCOUT',
+    #'2025D': '/ScoutingPFRun3/Run2025D-v1/HLTSCOUT',
 }
 
 mc_samples = {
 
-#        'WWW': '/WWW-4F_TuneCP5_13p6TeV_amcatnlo-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'WWZ': '/WWZ-4F_TuneCP5_13p6TeV_amcatnlo-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'ZZZ': '/ZZZ-5F_TuneCP5_13p6TeV_amcatnlo-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'WZZ': '/WZZ-5F_TuneCP5_13p6TeV_amcatnlo-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WWW': '/WWW-4F_TuneCP5_13p6TeV_amcatnlo-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WWZ': '/WWZ-4F_TuneCP5_13p6TeV_amcatnlo-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'ZZZ': '/ZZZ-5F_TuneCP5_13p6TeV_amcatnlo-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WZZ': '/WZZ-5F_TuneCP5_13p6TeV_amcatnlo-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
 
-#        'WminsH': '/WminusH-WtoLNu-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'WplusH': '/WplusH-WtoLNu-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'ZH': '/ZH-Zto2Q-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'GluGluZH': '/GluGluZH-Zto2Q-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'ZH': '/ZH-Zto2Q-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'GluGluZH': '/GluGluZH-Zto2Q-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
 
-#        'QCD_HT-1000to1200': '/QCD-4Jets_Bin-HT-1000to1200_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'QCD_HT-100to200': '/QCD-4Jets_Bin-HT-100to200_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'QCD_HT-1200to1500': '/QCD-4Jets_Bin-HT-1200to1500_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'QCD_HT-1500to2000': '/QCD-4Jets_Bin-HT-1500to2000_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'QCD_HT-1500to2000': '/QCD-4Jets_Bin-HT-1500to2000_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-NoPU_150X_mcRun3_2024_realistic_v2_ext1-v2/MINIAODSIM',
-#        'QCD_HT-2000': '/QCD-4Jets_Bin-HT-2000_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'QCD_HT-2000': '/QCD-4Jets_Bin-HT-2000_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-NoPU_150X_mcRun3_2024_realistic_v2_ext1-v2/MINIAODSIM',
-#        'QCD_HT-200to400': '/QCD-4Jets_Bin-HT-200to400_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'QCD_HT-400to600': '/QCD-4Jets_Bin-HT-400to600_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'QCD_HT-40to70': '/QCD-4Jets_Bin-HT-40to70_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'QCD_HT-600to800': '/QCD-4Jets_Bin-HT-600to800_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'QCD_HT-70to100': '/QCD-4Jets_Bin-HT-70to100_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'QCD_HT-800to1000': '/QCD-4Jets_Bin-HT-800to1000_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WminsH-Wto2Q-Hto2Wto4Q': '/WminusH-Wto2Q-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WplusH-Wto2Q-Hto2Wto4Q': '/WplusH-Wto2Q-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WminusH-Wto2Q-Hto2Wto2L2Nu': '/WminusH-Wto2Q-Hto2Wto2L2Nu_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WminusH-Wto2Q-Hto2WtoLNu2Q': '/WminusH-Wto2Q-Hto2WtoLNu2Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WminusH-WtoLNu-Hto2Wto2L2Nu': '/WminusH-WtoLNu-Hto2Wto2L2Nu_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WminusH-WtoLNu-Hto2Wto4Q': '/WminusH-WtoLNu-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WminusH-WtoLNu-Hto2WtoLNu2Q': '/WminusH-WtoLNu-Hto2WtoLNu2Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WplusH-Wto2Q-Hto2WtoLNu2Q': '/WplusH-Wto2Q-Hto2WtoLNu2Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WplusH-Wto2Q-Hto2Wto2L2Nu': '/WplusH_Wto2Q_Hto2Wto2L2Nu_M-125_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WplusH-WtoLNu-Hto2Wto2L2Nu': '/WplusH-WtoLNu-Hto2Wto2L2Nu_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WplusH-WtoLNu-Hto2Wto4Q': '/WplusH-WtoLNu-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'WplusH-WtoLNu-Hto2WtoLNu2Q': '/WplusH-WtoLNu-Hto2WtoLNu2Q_M-125_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
 
-#        'TbarWplus' : '/TbarWplusto4Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'TWminus' : '/TWminusto4Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'TTTo4Q' : '/TTto4Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'TTToLNu2Q': '/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
-#        'TTTo2L2Nu': '/TTto2L2Nu_Par-ERD-On_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'ZH-Zto2L-Hto2Wto2L2Nu': '/ZH-Zto2L-Hto2Wto2L2Nu_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'ZH-Zto2L-Hto2Wto4Q': '/ZH-Zto2L-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'ZH-Zto2L-Hto2WtoLNu2Q': '/ZH-Zto2L-Hto2WtoLNu2Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'ZH-Zto2Q-Hto2Wto2L2Nu': '/ZH-Zto2Q-Hto2Wto2L2Nu_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'ZH-Zto2Q-Hto2WtoLNu2Q': '/ZH-Zto2Q-Hto2WtoLNu2Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM', 
+        'GluGluZH-Zto2L-Hto2Wto2L2Nu': '/GluGluZH-Zto2L-Hto2Wto2L2Nu_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'GluGluZH-Zto2L-Hto2Wto4Q': '/GluGluZH-Zto2L-Hto2Wto4Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'GluGluZH-Zto2L-Hto2WtoLNu2Q': '/GluGluZH-Zto2L-Hto2WtoLNu2Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'GluGluZH-Zto2Q-Hto2Wto2L2Nu': '/GluGluZH-Zto2Q-Hto2Wto2L2Nu_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'GluGluZH-Zto2Q-Hto2WtoLNu2Q': '/GluGluZH-Zto2Q-Hto2WtoLNu2Q_Par-M-125_TuneCP5_13p6TeV_powhegMINLO-jhugen-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+
+
+        'QCD_HT-1000to1200': '/QCD-4Jets_Bin-HT-1000to1200_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'QCD_HT-100to200': '/QCD-4Jets_Bin-HT-100to200_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'QCD_HT-1200to1500': '/QCD-4Jets_Bin-HT-1200to1500_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'QCD_HT-1500to2000': '/QCD-4Jets_Bin-HT-1500to2000_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'QCD_HT-2000': '/QCD-4Jets_Bin-HT-2000_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'QCD_HT-200to400': '/QCD-4Jets_Bin-HT-200to400_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'QCD_HT-400to600': '/QCD-4Jets_Bin-HT-400to600_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'QCD_HT-40to70': '/QCD-4Jets_Bin-HT-40to70_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'QCD_HT-600to800': '/QCD-4Jets_Bin-HT-600to800_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'QCD_HT-70to100': '/QCD-4Jets_Bin-HT-70to100_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'QCD_HT-800to1000': '/QCD-4Jets_Bin-HT-800to1000_TuneCP5_13p6TeV_madgraphMLM-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+
+        'TbarWplus' : '/TbarWplusto4Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'TWminus' : '/TWminusto4Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'TTTo4Q' : '/TTto4Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'TTToLNu2Q': '/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
+        'TTTo2L2Nu': '/TTto2L2Nu_Par-ERD-On_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
 
 #        'WW' : '/WW_TuneCP5_13p6TeV_pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
 #        'WZ' : '/WZ_TuneCP5_13p6TeV_pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v2/MINIAODSIM',
@@ -110,6 +134,7 @@ mc_samples = {
 
 parser = argparse.ArgumentParser(description='Submit or resubmit ScoutingNano CRAB tasks')
 parser.add_argument('-s', '--submit',   action='store_true', help='Submit new CRAB tasks')
+parser.add_argument('--sonic',   action='store_true', help='Use Sonic for inference in CRAB task')
 parser.add_argument('-r', '--resubmit', action='store_true', help='Resubmit failed jobs in existing CRAB projects')
 parser.add_argument('--report',        action='store_true', help='Report number of events processed (before event filters) for existing MC CRAB tasks')
 parser.add_argument('--mc',            action='store_true', help='Run over MC samples instead of data')
@@ -176,15 +201,16 @@ if not args.resubmit and not args.report:
         cfg.JobType.pluginName = 'Analysis'
         cfg.JobType.psetName = 'scoutingnano_mc_standalone2.py' if args.mc else 'scoutingnano_data_standalone2.py'
         cfg.JobType.allowUndistributedCMSSW = True
-        cfg.JobType.maxMemoryMB = 2500
-        cfg.JobType.numCores = 1
+        cfg.JobType.maxMemoryMB = 5000
+        cfg.JobType.numCores = 2
         cfg.JobType.maxJobRuntimeMin = 2750
-
+        if args.sonic:
+            cfg.JobType.pyCfgParams=['--threads', '2', '--tempDir', '.', '--address', 'cms-run3-miniaod.sonic.geddes.rcac.purdue.edu', '--port', '8001', '--verboseDiscovery', '--tries', '10']
         cfg.Debug.extraJDL = ['+CMS_ALLOW_OVERFLOW=False']
 
         cfg.Data.inputDataset = dataset
-        cfg.Data.outputDatasetTag = f'ScoutingNano_{mode_label}_{sample}{suffix}_260804_v6'
-        cfg.Data.outLFNDirBase = '/store/user/yiyangz/ScoutingNanov3/'
+        cfg.Data.outputDatasetTag = f'ScoutingNano_{mode_label}_{sample}{suffix}_v5_jetMatchFix'
+        cfg.Data.outLFNDirBase = '/store/user/jschulte/ScoutingNano/'
         cfg.Data.splitting = 'FileBased'
         cfg.Data.unitsPerJob = 8 if args.mc else  1
         if not args.mc:
@@ -195,9 +221,9 @@ if not args.resubmit and not args.report:
         if not args.mc:
             cfg.Data.userInputFiles = file_chunk
 
-        cfg.Site.storageSite = 'T2_CN_Beijing'
-        #cfg.Site.whitelist = ['T2_*']
-        cfg.Site.blacklist = ['T2_BR_UERJ', 'T2_US_Florida', 'T2_US_Wisconsin', 'T2_US_Nebraska', 'T2_US_Vanderbilt']
+        cfg.Site.storageSite = 'T2_US_Purdue'
+        cfg.Site.whitelist = ['T2_*']
+        cfg.Site.blacklist = ['T2_BR_UERJ', 'T2_US_Florida', 'T2_US_Wisconsin', 'T2_US_Caltech', 'T2_US_Nebraska']
 
         if args.submit:
             try:
@@ -215,6 +241,25 @@ if args.resubmit:
             crabCommand('resubmit', dir=d, siteblacklist='T2_BR_UERJ,T2_US_Florida,T2_US_Wisconsin,T2_US_Caltech,T2_US_Nebraska,T2_US_Vanderbilt')
         except Exception as e:
             print (f"failed to resubmit: {e}")
+
+if args.report:
+    print('\nReporting events processed (before event filters) for MC CRAB tasks:')
+    total_events = 0
+    for sample in mc_samples:
+        task_name = f'scoutingNanoUParT_{sample}'
+        d = os.path.join('crab_projects', f'crab_{task_name}')
+        if not os.path.isdir(d):
+            print(f'  [{sample}] No CRAB project directory found ({d}), skipping.')
+            continue
+        try:
+            res = crabCommand('report', dir=d)
+            n = res.get('numEventsRead', 'n/a')
+            print(f'  [{sample}] Events read (pre-filter): {n}')
+            if isinstance(n, str) and n.isdigit():
+                total_events += int(n)
+        except Exception as e:
+            print(f'  [{sample}] Failed to get report: {e}')
+    print(f'\nTotal events read across all MC tasks: {total_events}')
 
 if args.report:
     print('\nReporting events processed (before event filters) for MC CRAB tasks:')
