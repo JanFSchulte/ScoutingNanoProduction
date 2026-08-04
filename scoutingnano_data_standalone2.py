@@ -6,7 +6,9 @@
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.Eras.Era_Run3_2024_cff import Run3_2024
+from Configuration.ProcessModifiers.unifiedparticleTransformerAK4SonicTriton_cff import unifiedparticleTransformerAK4SonicTriton
 
+#process = cms.Process('NANO',Run3_2024,unifiedparticleTransformerAK4SonicTriton)
 process = cms.Process('NANO',Run3_2024)
 
 # import of standard configurations
@@ -92,6 +94,24 @@ process.NANOAODoutput = cms.OutputModule("NanoAODOutputModule",
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '150X_dataRun3_v8', '')
 
+# SONIC/Triton: point the client at the tritonserver instance started via singularity
+# (see RecoBTag/CombinedScouting/data/models/README.md for the model repository it serves).
+#process.load('HeterogeneousCore.SonicTriton.TritonService_cff')
+#process.TritonService.verbose = True
+#process.TritonService.servers.append(
+#    cms.PSet(
+#        name = cms.untracked.string("default"),
+#        address = cms.untracked.string("localhost"),
+#        port = cms.untracked.uint32(8001),
+#    )
+#)
+# these categories are LogInfo/LogWarning by default and get dropped by MessageLogger's
+# default per-category limit unless explicitly given one here -- without this, TritonService's
+# server-discovery messages (and any MissingModel/connection failures) are silently swallowed.
+for _cat in ['TritonDiscovery', 'TritonService', 'TritonFailure', 'PreferredServer', 'MissingModel',
+             'TritonClient', 'UnifiedParticleTransformerAK4SonicJetTagsScoutingV2Producer']:
+    setattr(process.MessageLogger.cerr, _cat, cms.untracked.PSet(limit = cms.untracked.int32(10000000)))
+
 
 process.scoutingFatJetFilterCands = cms.EDFilter("CandViewCountFilter",
     src = cms.InputTag("scoutingFatPFJetRecluster"),
@@ -106,7 +126,8 @@ process.fatJetFilter_step = cms.Path(
 process.dstJetHTFilter = cms.EDFilter("TriggerResultsFilter",
     # The TriggerResults product written by the HLT process
     triggerConditions = cms.vstring(
-        'DST_PFScouting_JetHT_v* / 3'   # the ' / 3' means: require bit to be
+        'DST_PFScouting_JetHT_v* / 3',
+        'DST_PFScouting_SingleMuon_v* / 3'# the ' / 3' means: require bit to be
                                           # set (fired and not prescaled away);
                                           # drop it if you just want "fired"
     ),

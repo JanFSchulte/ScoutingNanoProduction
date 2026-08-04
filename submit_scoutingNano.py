@@ -8,7 +8,7 @@ from CRABAPI.RawCommand import crabCommand
 
 MAX_FILES_PER_TASK = 9000
 CACHE_DIR = 'filelist_cache'
-LUMI_JSON = '2024.json'
+LUMI_JSON = 'Cert_Collisions2025_391658_398903_Golden.json'
 
 data_samples = {
     #'2024B': '/ScoutingPFRun3/Run2024B-v1/HLTSCOUT',
@@ -18,7 +18,10 @@ data_samples = {
     #'2024F': '/ScoutingPFRun3/Run2024F-v1/HLTSCOUT',
     #'2024G': '/ScoutingPFRun3/Run2024G-v1/HLTSCOUT',
     #'2024H': '/ScoutingPFRun3/Run2024H-v1/HLTSCOUT',
-    '2024I': '/ScoutingPFRun3/Run2024I-v1/HLTSCOUT',
+    #'2024I': '/ScoutingPFRun3/Run2024I-v1/HLTSCOUT',
+    '2025B': '/ScoutingPFRun3/Run2025B-v1/HLTSCOUT',
+    #'2025C': '/ScoutingPFRun3/Run2025C-v1/HLTSCOUT',
+    #'2025D': '/ScoutingPFRun3/Run2025D-v1/HLTSCOUT',
 }
 
 mc_samples = {
@@ -132,6 +135,7 @@ mc_samples = {
 
 parser = argparse.ArgumentParser(description='Submit or resubmit ScoutingNano CRAB tasks')
 parser.add_argument('-s', '--submit',   action='store_true', help='Submit new CRAB tasks')
+parser.add_argument('--sonic',   action='store_true', help='Use Sonic for inference in CRAB task')
 parser.add_argument('-r', '--resubmit', action='store_true', help='Resubmit failed jobs in existing CRAB projects')
 parser.add_argument('--report',        action='store_true', help='Report number of events processed (before event filters) for existing MC CRAB tasks')
 parser.add_argument('--mc',            action='store_true', help='Run over MC samples instead of data')
@@ -242,10 +246,11 @@ if not args.resubmit and not args.report:
         cfg.JobType.pluginName = 'Analysis'
         cfg.JobType.psetName = 'scoutingnano_mc_standalone2.py' if args.mc else 'scoutingnano_data_standalone2.py'
         cfg.JobType.allowUndistributedCMSSW = True
-        cfg.JobType.maxMemoryMB = 2500
-        cfg.JobType.numCores = 1
+        cfg.JobType.maxMemoryMB = 5000
+        cfg.JobType.numCores = 2
         cfg.JobType.maxJobRuntimeMin = 2750
-
+        if args.sonic:
+            cfg.JobType.pyCfgParams=['--threads', '2', '--tempDir', '.', '--address', 'cms-run3-miniaod.sonic.geddes.rcac.purdue.edu', '--port', '8001', '--verboseDiscovery', '--tries', '10']
         cfg.Debug.extraJDL = ['+CMS_ALLOW_OVERFLOW=False']
 
         cfg.Data.inputDataset = dataset
