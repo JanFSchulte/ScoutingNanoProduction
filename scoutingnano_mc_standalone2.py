@@ -29,7 +29,13 @@ process.maxEvents = cms.untracked.PSet(
 # Input source
 process.source = cms.Source("PoolSource",
     #fileNames = cms.untracked.vstring('file:0034afa6-0d8d-4409-8154-afda2a1d7d4b.root'),
-    fileNames = cms.untracked.vstring('root://eos.cms.rcac.purdue.edu//store/mc/RunIII2024Summer24MiniAODv6/TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/MINIAODSIM/150X_mcRun3_2024_realistic_v2-v3/2810005/b9aaedef-5544-445d-8445-0dd6740ff646.root'),
+    #fileNames = cms.untracked.vstring('root://eos.cms.rcac.purdue.edu//store/mc/RunIII2024Summer24MiniAODv6/TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/MINIAODSIM/150X_mcRun3_2024_realistic_v2-v3/2810005/b9aaedef-5544-445d-8445-0dd6740ff646.root'),
+    fileNames = cms.untracked.vstring('/store/mc/RunIII2024Summer24MiniAODv6/WWW-4F_TuneCP5_13p6TeV_amcatnlo-pythia8/MINIAODSIM/150X_mcRun3_2024_realistic_v2-v2/2520000/01da210e-744e-452c-ac82-e78d8a4fd79d.root',
+        '/store/mc/RunIII2024Summer24MiniAODv6/WWW-4F_TuneCP5_13p6TeV_amcatnlo-pythia8/MINIAODSIM/150X_mcRun3_2024_realistic_v2-v2/2520000/7cf1f8b9-3112-4e31-a237-3d82adedea9f.root',
+        '/store/mc/RunIII2024Summer24MiniAODv6/WWW-4F_TuneCP5_13p6TeV_amcatnlo-pythia8/MINIAODSIM/150X_mcRun3_2024_realistic_v2-v2/2520000/ac363411-dee7-4ff0-b186-7851b83a58ec.root',
+        '/store/mc/RunIII2024Summer24MiniAODv6/WWW-4F_TuneCP5_13p6TeV_amcatnlo-pythia8/MINIAODSIM/150X_mcRun3_2024_realistic_v2-v2/2520000/01da210e-744e-452c-ac82-e78d8a4fd79d.root',
+        '/store/mc/RunIII2024Summer24MiniAODv6/WWW-4F_TuneCP5_13p6TeV_amcatnlo-pythia8/MINIAODSIM/150X_mcRun3_2024_realistic_v2-v2/2520000/8404e5c8-df4a-4ce1-9efe-faa026caf8c1.root',
+        ),
     #fileNames = cms.untracked.vstring('root://cmsxrootd.fnal.gov//store/mc/RunIII2024Summer24MiniAODv6/TTto4Q_TuneCP5_13p6TeV_powheg-pythia8/MINIAODSIM/150X_mcRun3_2024_realistic_v2-v2/110000/00cbbb1e-7f25-47d0-9d35-13eb12e55cb6.root'),
 #    fileNames = cms.untracked.vstring('root://cmsxrootd.fnal.gov//store/mc/RunIII2024Summer24MiniAODv6/DYto2Tau-2Jets_Bin-2J-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/MINIAODSIM/150X_mcRun3_2024_realistic_v2-v2/100000/00eefed9-2b8b-4cd9-a8af-d19c53e1ff21.root'),
     secondaryFileNames = cms.untracked.vstring()

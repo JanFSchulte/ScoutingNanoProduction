@@ -103,16 +103,11 @@ process.fatJetFilter_step = cms.Path(
     process.scoutingNanoSequence + process.scoutingFatJetFilterCands
 )
 
-process.NANOAODoutput.SelectEvents = cms.untracked.PSet(
-    SelectEvents = cms.vstring('fatJetFilter_step')
-)
-
 process.dstJetHTFilter = cms.EDFilter("TriggerResultsFilter",
     # The TriggerResults product written by the HLT process
     triggerConditions = cms.vstring(
-        'DST_PFScouting_JetHT_v* / 3'   # the ' / 3' means: require bit to be
-                                          # set (fired and not prescaled away);
-                                          # drop it if you just want "fired"
+            'DST_PFScouting_JetHT_v*',
+            'DST_PFScouting_SingleMuon_v*',
     ),
     hltResults    = cms.InputTag('TriggerResults', '', 'HLT'),
     l1tResults    = cms.InputTag(''),          # not using L1 here
@@ -121,9 +116,18 @@ process.dstJetHTFilter = cms.EDFilter("TriggerResultsFilter",
     daqPartitions = cms.uint32(1),
 )
 
+process.eventFilter_step = cms.Path(
+    process.dstJetHTFilter
+    + process.scoutingNanoSequence
+    + process.scoutingFatJetFilterCands
+)
+
+process.NANOAODoutput.SelectEvents = cms.untracked.PSet(
+    SelectEvents = cms.vstring('eventFilter_step')
+)
+
 
 # Path and EndPath definitions
-process.triggerFilter_step = cms.Path(process.dstJetHTFilter)
 process.nanoAOD_step = cms.Path(process.scoutingNanoSequence)
 process.endjob_step = cms.EndPath(process.endOfProcess)
 process.NANOAODoutput_step = cms.EndPath(process.NANOAODoutput)
@@ -132,8 +136,8 @@ process.NANOAODoutput_step = cms.EndPath(process.NANOAODoutput)
 #process.schedule = cms.Schedule(process.nanoAOD_step,process.endjob_step,process.NANOAODoutput_step)
 
 process.schedule = cms.Schedule(
-    process.triggerFilter_step,        
-    process.fatJetFilter_step,
+    process.eventFilter_step,        
+    #process.fatJetFilter_step,
     process.endjob_step,
     process.NANOAODoutput_step,
 )
