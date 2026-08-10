@@ -181,16 +181,45 @@ if not args.resubmit and not args.report:
     if args.mc:
         task_chunks = [None]  # single task per MC sample; CRAB handles splitting
     else:
-        files = get_cached_files(sample, dataset)
-        task_chunks = list(chunks(files, MAX_FILES_PER_TASK))
-        print(f'  {len(files)} files -> {len(task_chunks)} task(s)')
+        task_chunks = [[
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/174/00000/2f3c8376-e13b-46b6-aa71-71314ba39b7b.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/00cab2e5-0267-415c-a5a1-35cbbd1d001b.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/00f3cbdd-3f16-4f49-8e47-d5a938cad79b.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/011d47d8-57a7-4df1-92f9-f721a0548dc8.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/016f7a2e-933d-4b87-86e5-cbff4be80bf3.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/028f796f-3796-4afd-bd74-5877a5130201.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/02b94ef9-2740-4e72-a277-2725f484d77f.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/0370258c-6a9a-4765-a942-e3ef3fdf83fd.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/03d85c33-8dfa-4803-a268-c697679088e4.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/04e3e689-37e4-4a83-a7bb-eea59ba0fe7a.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/04e6cb7c-3888-4979-a1ac-01eaf9183e67.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/0534ebe7-e22b-4666-92fd-626ca532aa71.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/05c7827a-bf7f-40fe-a7b9-026b079d49f8.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/064ee939-3c50-417d-bb4a-9551e5afafa0.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/06bb923c-bb39-42c0-b96d-91cd1dd642c6.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/06e24022-bc16-487f-b790-d13ec8ff4be2.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/06ec5ad2-903f-43c6-9644-5d7b1c48011b.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/0715bbfb-8078-4e4c-bf0e-b4f8f3dc7e1c.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/07502da1-d6f6-4775-b15d-68c06e0ad442.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/0804afa1-d2d2-4489-b62b-205bff2a76d4.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/08511372-e4ee-4592-867f-186a031ffc26.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/0853292f-ef31-4e31-9557-af459d92f6ec.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/08cfa4ef-f2f8-4b19-bb79-ad20e2935cee.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/08e92caa-23ff-4d41-91d2-2b17d3019ff5.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/08f46976-7520-4d54-99bd-0e91059fd830.root",
+  "/store/data/Run2025C/ScoutingPFRun3/HLTSCOUT/v1/000/392/175/00000/0925988b-2e5a-4e36-8ad9-3de7117d01fb.root",
+            ]]
+        #print(f'  {len(files)} files -> {len(task_chunks)} task(s)')
 
     for i, file_chunk in enumerate(task_chunks):
         if args.part is not None and i + 1 != args.part:
             continue
         
         suffix = f'_part{i+1}' if len(task_chunks) > 1 else ''
-        task_name = f'scoutingNanoUParT_{sample}{suffix}_v6'
+        if args.sonic:
+            task_name = f'scoutingNanoUParT_{sample}{suffix}_testSONIC'
+        else:
+            task_name = f'scoutingNanoUParT_{sample}{suffix}_testCPU'
         print(f'  Configuring task: {task_name}')
 
         cfg = config()
@@ -215,11 +244,11 @@ if not args.resubmit and not args.report:
         cfg.Data.outputDatasetTag = f'ScoutingNano_{mode_label}_{sample}{suffix}_v6'
         cfg.Data.outLFNDirBase = '/store/user/jschulte/ScoutingNano/'
         cfg.Data.splitting = 'FileBased'
-        cfg.Data.unitsPerJob = 8 if args.mc else  1
-        if not args.mc:
-            cfg.Data.lumiMask = LUMI_JSON
+        cfg.Data.unitsPerJob = 8 if args.mc else  30
+        #if not args.mc:
+        #    cfg.Data.lumiMask = LUMI_JSON
         cfg.Data.ignoreLocality = True
-        cfg.Data.publication = True
+        cfg.Data.publication = False
 
         if not args.mc:
             cfg.Data.userInputFiles = file_chunk
@@ -229,8 +258,8 @@ if not args.resubmit and not args.report:
             cfg.Site.whitelist = ['T2_US_Purdue']
             cfg.Site.blacklist = ['T2_US_Caltech','T2_US_UCSD','T2_US_Florida','T2_US_MIT','T2_US_Nebraska','T2_US_Vanderbilt','T2_US_Wisconsin']
         else:
-            cfg.Site.whitelist = ['T2_*']
-            cfg.Site.blacklist = ['T2_BR_UERJ', 'T2_US_Florida', 'T2_US_Wisconsin', 'T2_US_Caltech', 'T2_US_Nebraska']
+            cfg.Site.whitelist = ['T2_US_Purdue']
+            cfg.Site.blacklist = ['T2_US_Caltech','T2_US_UCSD','T2_US_Florida','T2_US_MIT','T2_US_Nebraska','T2_US_Vanderbilt','T2_US_Wisconsin']
 
         if args.submit:
             try:
